@@ -24,7 +24,7 @@ The project was created as part of the COEN 6331 Neural Networks course at Conco
 The task is to train an ART network to recognize and classify 20 different letter patterns (A-T) represented as 8×8 binary matrices (64 pixels total). Each pattern is flattened into a 1D array before being fed into the network.
 
 **Key challenges addressed:**
-- **Pattern similarity**: Letters like 'C' and 'P' are subsets of 'B'
+- **Pattern similarity**: Letters like 'C' and 'P' are subsets of 'B', 'F' is a subset of 'E'
 - **Noise robustness**: Network must handle corrupted input patterns
 - **Plasticity-stability balance**: Learn new patterns without forgetting old ones
 
@@ -52,11 +52,11 @@ The standard ART similarity measure was coupled with a **penalty mechanism**:
 - Controlled by penalty rate parameter (p)
 
 ### Vigilance Parameter Optimization
-- **Low vigilance (δ = 0.2-0.5)**: More tolerance, better generalization
-- **High vigilance (δ = 0.8-0.95)**: Stricter categorization, risk of over-rejection
+- **Low vigilance**: More tolerance, better generalization
+- **High vigilance**: Stricter categorization, risk of over-rejection (δ > 0.7 leads to a drop in accuracy)
 - **Optimal range**: δ = 0.5 with penalty rate p = 0.001
 
-## Performance Results
+## Some Performance Results
 
 ### Clean Pattern Recognition
 | Configuration | Overall Accuracy |
@@ -68,15 +68,15 @@ The standard ART similarity measure was coupled with a **penalty mechanism**:
 ### Noisy Pattern Recognition (10% noise)
 | Configuration | Overall Accuracy |
 |---------------|-----------------|
-| δ = 0.5, p = 0 | 77.39% |
-| δ = 0.8, p = 0 | 75.2% |
+| δ = 0.5, p = 0 | 69.90% |
+| δ = 0.8, p = 0 | 48.17% |
 | δ = 0.5, p = 0.001 | **84.94%** |
 
-### Noise Tolerance Analysis
-- **5% noise**: ~95% accuracy
+### Noise Tolerance Analysis (with p=0.001 and δ=0.5)
+- **5% noise**: ~93% accuracy
 - **10% noise**: ~85% accuracy  
+- **20% noise**: ~70% accuracy
 - **25% noise**: ~50% accuracy
-- **50% noise**: ~30% accuracy
 
 ## Project Structure
 
@@ -91,7 +91,7 @@ art-pattern-recognition/
 
 1. **Standard ART limitations**: Basic similarity measure causes over-generalization
 2. **Penalty mechanism effectiveness**: Dramatic improvement in pattern discrimination
-3. **Vigilance sweet spot**: δ = 0.5 provides optimal balance
+3. **Vigilance range**: δ = 0.5 provides optimal balance
 4. **Noise robustness**: Network maintains reasonable performance up to 25% noise
 5. **Training dynamics**: Multiple epochs needed for complex pattern sets
 
