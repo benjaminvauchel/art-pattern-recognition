@@ -130,7 +130,6 @@ The project uses comprehensive evaluation including:
 - Python 3.x
 - NumPy
 - Matplotlib
-- Standard scientific computing libraries
 
 ## Future Enhancements
 
